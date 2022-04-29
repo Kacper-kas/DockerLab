@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+LABEL description="Dockerfile Ubuntu Apache PHP
+
+ENV TZ=Europe/Warsaw
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y apache2 && apt-get install -y php && echo 'Listen 8080' >> /etc/apache2/ports.conf && echo 'ServerName localhost' >> /etc/apache2/apache2.conf && /etc/init.d/apache2 restart && /etc/init.d/apache2 start
+EXPOSE 8080/tcp
